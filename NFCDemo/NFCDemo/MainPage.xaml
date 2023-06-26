@@ -11,8 +11,15 @@
         <Label x:Name="lblEsl" Text="[Placeholder]" HorizontalOptions="Center" VerticalOptions="Center" >
             
         </Label>
-     
+        
         <Button Text="Start Reading" Clicked="Button_Clicked"  ></Button>
+        <Label x:Name="lblLogs" HorizontalTextAlignment="Start" VerticalTextAlignment="Start">
+            <Label.FormattedText>
+                <FormattedString>
+                </FormattedString>
+            </Label.FormattedText>
+
+        </Label>
     </StackLayout>
 
 </ContentPage>

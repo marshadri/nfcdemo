@@ -15,6 +15,8 @@ namespace NFCDemo.Droid.Services
     {
         public TaskCompletionSource<string> TagIdTaskCompletionSource { get; set; }
 
+        public event EventHandler<(string Type, string message)> OnLog;
+
         public Task<string> ReadTagIdAsync()
         {
             TagIdTaskCompletionSource = new TaskCompletionSource<string>();

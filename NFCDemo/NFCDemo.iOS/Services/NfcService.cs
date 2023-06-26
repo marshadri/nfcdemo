@@ -15,6 +15,9 @@ namespace NFCDemo.iOS.Services
     public class NfcService : NFCTagReaderSessionDelegate, INfcService
     {
         private NFCTagReaderSession readerSession;
+
+        public event EventHandler<(string Type, string message)> OnLog;
+
         public TaskCompletionSource<string> TagIdTaskCompletionSource { get; set; }
 
 
@@ -63,18 +66,26 @@ namespace NFCDemo.iOS.Services
             {
                 if (error != null)
                 {
-                    tcs.TrySetResult($"Error: {error.LocalizedDescription}");
+                    Log($"Error: {error.LocalizedDescription}");
                     return;
                 }
+                if (!NativeLibrary.NFCLib.IsSupportedTag(tag))
+                {
+                    Log($"Error: Tag is not supported!");
+                    return;
+                }
+
                 try
                 {
                     using (NativeLibrary.NFCLib lib = new NativeLibrary.NFCLib())
                     {
+                        Log("Trying to get Esl Id!");
                         lib.GetEslIdAction(tag, (response) =>
                         {
-                           if(response.Error != null)
+                            Log(response.ToString());
+                            if (response.Error != null)
                             {
-                                tcs.TrySetResult(response.Error.Description);
+                                Log(response.Error.Description);
                             }
                             else
                             {
@@ -88,14 +99,14 @@ namespace NFCDemo.iOS.Services
                             }
                         });
                     }
-                    tcs.TrySetResult("Trying to get Esl Id!");
+
 
                 }
                 catch (Exception ex)
                 {
                     tcs.TrySetException(ex);
                 }
-                
+
 
             });
         }
@@ -104,9 +115,13 @@ namespace NFCDemo.iOS.Services
         public override void DidInvalidate(NFCTagReaderSession session, NSError error)
         {
             TagIdTaskCompletionSource.TrySetException(new Exception(error.LocalizedDescription));
-             
+
         }
 
+        public void Log(string message, string type = "info")
+        {
+            OnLog?.Invoke(this, (type, message));
+        }
     }
 }
 

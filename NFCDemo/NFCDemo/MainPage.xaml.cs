@@ -16,12 +16,17 @@ namespace NFCDemo
         {
             InitializeComponent();
             nfcService = DependencyService.Get<INfcService>();
-
+            nfcService.OnLog += NfcService_OnLog;
         }
+
+        private void NfcService_OnLog(object sender, (string Type, string message) e)
+        {
+            lblLogs.FormattedText.Spans.Add(new Span() { Text = $"{e.Type}: {e.message} {Environment.NewLine}" });
+        } 
 
         void Button_Clicked(System.Object sender, System.EventArgs e)
         {
-            ClearText();
+            
             nfcService.ReadTagIdAsync().ContinueWith(x =>
             {
                 var response = x.Result;

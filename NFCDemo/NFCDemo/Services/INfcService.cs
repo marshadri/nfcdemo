@@ -6,6 +6,7 @@ namespace NFCDemo.Services
     public interface INfcService
     {
         Task<string> ReadTagIdAsync();
+        event EventHandler<(string Type, string message)> OnLog;
     }
 
     public static class EslCommands
