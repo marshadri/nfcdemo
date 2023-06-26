@@ -73,9 +73,9 @@ namespace NFCDemo.iOS.Services
                 {
                     NSData command = new NSData(Convert.ToBase64String(EslCommands.EslIdData), NSDataBase64DecodingOptions.IgnoreUnknownCharacters); // Read binary blocks
 
-                    miFareTag.SendMiFareCommand(command, delegate (NSData responseData, NSError error)
+                    miFareTag.SendMiFareCommand(command, delegate (NSData responseData, NSError _error)
                     {
-                        if (error != null)
+                        if (_error != null)
                         {
                             tcs.TrySetResult(null);
                             return;
