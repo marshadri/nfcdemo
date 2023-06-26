@@ -52,10 +52,6 @@ namespace NFCDemo.iOS.Services
             });
         }
 
-
-
-
-
         public override void DidDetectTags(NFCTagReaderSession session, INFCTag[] tags)
         {
             var tcs = TagIdTaskCompletionSource;
@@ -68,23 +64,32 @@ namespace NFCDemo.iOS.Services
                     tcs.TrySetResult(null);
                     return;
                 }
-
+                
+                NativeLibrary.NFCLib lib = new NativeLibrary.NFCLib();
                 if (tag is INFCMiFareTag miFareTag)
                 {
-                    NSData command = new NSData(Convert.ToBase64String(EslCommands.EslIdData), NSDataBase64DecodingOptions.IgnoreUnknownCharacters); // Read binary blocks
-
-                    miFareTag.SendMiFareCommand(command, delegate (NSData responseData, NSError _error)
+                    lib.GetEslIdAction(tag, (response) =>
                     {
-                        if (_error != null)
-                        {
-                            tcs.TrySetResult(null);
-                            return;
-                        }
-
-                        var result = responseData.ToArray(); // Response data as byte array
-                        tcs.TrySetResult(BitConverter.ToString(result));
+                        tcs.SetResult(response.ToString());
                     });
                 }
+               
+                //if (tag is INFCMiFareTag miFareTag)
+                //{
+                //    NSData command = new NSData(Convert.ToBase64String(EslCommands.EslIdData), NSDataBase64DecodingOptions.IgnoreUnknownCharacters); // Read binary blocks
+
+                //    miFareTag.SendMiFareCommand(command, delegate (NSData responseData, NSError _error)
+                //    {
+                //        if (_error != null)
+                //        {
+                //            tcs.TrySetResult(null);
+                //            return;
+                //        }
+
+                //        var result = responseData.ToArray(); // Response data as byte array
+                //        tcs.TrySetResult(BitConverter.ToString(result));
+                //    });
+                //}
             });
         }
 

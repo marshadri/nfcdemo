@@ -31,7 +31,7 @@ namespace NFCDemo.Droid.Services
                 byte[] response = isoDep.Transceive(command);
                 // process the response
                 string responseString = BitConverter.ToString(response);//.Replace("-", string.Empty);
-                
+                // 6A-B2
                 TagIdTaskCompletionSource.SetResult(responseString);
             }
             catch (Exception ex)

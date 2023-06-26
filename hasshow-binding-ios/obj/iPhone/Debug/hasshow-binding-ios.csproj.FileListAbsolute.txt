@@ -1,0 +1,5 @@
+/Users/marshad/Projects/NFCDemo/hasshow-binding-ios/bin/iPhone/Debug/hasshow-binding-ios.dll
+/Users/marshad/Projects/NFCDemo/hasshow-binding-ios/obj/iPhone/Debug/_ProcessedBundleResourcesPath.items
+/Users/marshad/Projects/NFCDemo/hasshow-binding-ios/obj/iPhone/Debug/_ProcessedContentPath.items
+/Users/marshad/Projects/NFCDemo/hasshow-binding-ios/obj/iPhone/Debug/hasshow-binding-ios.csproj.CoreCompileInputs.cache
+/Users/marshad/Projects/NFCDemo/hasshow-binding-ios/obj/iPhone/Debug/hasshow-binding-ios.dll

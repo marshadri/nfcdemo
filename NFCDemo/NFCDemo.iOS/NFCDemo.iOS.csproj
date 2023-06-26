@@ -27,6 +27,8 @@
     <MtouchArch>x86_64</MtouchArch>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
+    <CodesignProvision>iOS Team Provisioning Profile: com.ri.NFCDemo</CodesignProvision>
+    <CodesignKey>Apple Development: Muhammad Arshad (AR9TVT3HH6)</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -132,6 +134,9 @@
     <ProjectReference Include="..\NFCDemo\NFCDemo.csproj">
       <Project>{D5D2D751-808B-428F-9E66-EA6EBD2CF753}</Project>
       <Name>NFCDemo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\hasshow-binding-ios\hasshow-binding-ios.csproj">
+      <Name>hasshow-binding-ios</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

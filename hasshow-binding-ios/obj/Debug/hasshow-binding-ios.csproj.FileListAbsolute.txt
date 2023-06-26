@@ -1,0 +1,8 @@
+/Users/marshad/Projects/NFCDemo/hasshow-binding-ios/obj/Debug/_ProcessedBundleResourcesPath.items
+/Users/marshad/Projects/NFCDemo/hasshow-binding-ios/obj/Debug/_ProcessedContentPath.items
+/Users/marshad/Projects/NFCDemo/hasshow-binding-ios/obj/Debug/hasshow-binding-ios.csproj.AssemblyReference.cache
+/Users/marshad/Projects/NFCDemo/hasshow-binding-ios/bin/Debug/NativeLibrary.dll
+/Users/marshad/Projects/NFCDemo/hasshow-binding-ios/bin/Debug/NativeLibrary.pdb
+/Users/marshad/Projects/NFCDemo/hasshow-binding-ios/obj/Debug/hasshow-binding-ios.csproj.CoreCompileInputs.cache
+/Users/marshad/Projects/NFCDemo/hasshow-binding-ios/obj/Debug/NativeLibrary.dll
+/Users/marshad/Projects/NFCDemo/hasshow-binding-ios/obj/Debug/NativeLibrary.pdb
