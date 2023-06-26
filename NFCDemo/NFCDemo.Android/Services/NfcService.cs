@@ -24,13 +24,12 @@ namespace NFCDemo.Droid.Services
         public void OnTagDiscovered(Tag tag)
         {
             IsoDep isoDep = IsoDep.Get(tag);
-
             try
             {
                 isoDep.Connect();
-                byte[] command = new byte[] { (byte)0x00, (byte)0xC0, (byte)0x00, (byte)0x01, (byte)0x05, (byte)0x30, (byte)0xD0 };
+                byte[] command = EslCommands.EslIdData;
                 byte[] response = isoDep.Transceive(command);
-                //// process the response
+                // process the response
                 string responseString = BitConverter.ToString(response);//.Replace("-", string.Empty);
                 
                 TagIdTaskCompletionSource.SetResult(responseString);
