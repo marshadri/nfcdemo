@@ -28,6 +28,7 @@ namespace NFCDemo
                 if (x.Exception == null)
                 {
                     lblEsl.Text = response;
+                    DisplayAlert("NFC Demo",  response, "OK");
                 }
                 else
                 {
@@ -35,12 +36,12 @@ namespace NFCDemo
                 }
 
             });
-            DisplayAlert("NFC Demo", "Approach the tag", "OK");
+            
 
         }
         void ClearText()
         {
-            lblEsl.Text = string.Empty;
+            lblEsl.Text = "[Placeholder]";
         }
     }
 }

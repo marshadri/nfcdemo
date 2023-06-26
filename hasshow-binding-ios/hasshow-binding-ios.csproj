@@ -50,6 +50,15 @@
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <LangVersion>Default</LangVersion>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <DefineConstants></DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <AssemblyName>hasshow-binding-ios</AssemblyName>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <LangVersion>Default</LangVersion>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="Xamarin.iOS" />
@@ -66,13 +75,13 @@
   <ItemGroup>
     <ObjcBindingCoreSource Include="Structs.cs" />
   </ItemGroup>
-  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' or '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator'  ">
     <NativeReference Include="..\ios-sdk\ios-arm64_x86_64-simulator\HanshowNFCLib.framework">
       <Kind>Framework</Kind>
       <SmartLink>False</SmartLink>
     </NativeReference>
   </ItemGroup>
-  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+  <ItemGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' or '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <NativeReference Include="..\ios-sdk\ios-arm64\HanshowNFCLib.framework">
       <Kind>Framework</Kind>
       <SmartLink>False</SmartLink>

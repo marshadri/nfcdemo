@@ -21,7 +21,7 @@ namespace NFCDemo.iOS.Services
             TagIdTaskCompletionSource = new TaskCompletionSource<string>();
             readerSession = new NFCTagReaderSession(NFCPollingOption.Iso14443, this, DispatchQueue.CurrentQueue)
             {
-                AlertMessage = "Alert"
+                AlertMessage = "Hold tag near!"
             };
             readerSession.BeginSession();
             return TagIdTaskCompletionSource.Task.ContinueWith<string>(rx =>
@@ -61,35 +61,27 @@ namespace NFCDemo.iOS.Services
             {
                 if (error != null)
                 {
-                    tcs.TrySetResult(null);
+                    tcs.TrySetResult($"Error: {error.LocalizedDescription}");
                     return;
                 }
-                
-                NativeLibrary.NFCLib lib = new NativeLibrary.NFCLib();
-                if (tag is INFCMiFareTag miFareTag)
+                try
                 {
-                    lib.GetEslIdAction(tag, (response) =>
+                    using (NativeLibrary.NFCLib lib = new NativeLibrary.NFCLib())
                     {
-                        tcs.SetResult(response.ToString());
-                    });
+                        lib.GetEslIdAction(tag, (response) =>
+                        {
+                            tcs.TrySetResult(response.ToString());
+                        });
+                    }
+                    tcs.TrySetResult("Trying to get Esl Id!");
+
                 }
-               
-                //if (tag is INFCMiFareTag miFareTag)
-                //{
-                //    NSData command = new NSData(Convert.ToBase64String(EslCommands.EslIdData), NSDataBase64DecodingOptions.IgnoreUnknownCharacters); // Read binary blocks
+                catch (Exception ex)
+                {
+                    tcs.TrySetException(ex);
+                }
+                
 
-                //    miFareTag.SendMiFareCommand(command, delegate (NSData responseData, NSError _error)
-                //    {
-                //        if (_error != null)
-                //        {
-                //            tcs.TrySetResult(null);
-                //            return;
-                //        }
-
-                //        var result = responseData.ToArray(); // Response data as byte array
-                //        tcs.TrySetResult(BitConverter.ToString(result));
-                //    });
-                //}
             });
         }
 

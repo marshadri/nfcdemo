@@ -12,7 +12,7 @@
             
         </Label>
      
-        <Button Text="Get Esl Id" Clicked="Button_Clicked"  ></Button>
+        <Button Text="Start Reading" Clicked="Button_Clicked"  ></Button>
     </StackLayout>
 
 </ContentPage>
