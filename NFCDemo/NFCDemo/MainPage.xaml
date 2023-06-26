@@ -13,6 +13,7 @@
         </Label>
         
         <Button Text="Start Reading" Clicked="Button_Clicked"  ></Button>
+        <Button Text="Clear Logs" Clicked="ButtonClearLogs_Clicked"></Button>
         <Label x:Name="lblLogs" HorizontalTextAlignment="Start" VerticalTextAlignment="Start">
             <Label.FormattedText>
                 <FormattedString>

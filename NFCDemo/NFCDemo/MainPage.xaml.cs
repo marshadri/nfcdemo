@@ -48,6 +48,11 @@ namespace NFCDemo
         {
             lblEsl.Text = "[Placeholder]";
         }
+
+        void ButtonClearLogs_Clicked(System.Object sender, System.EventArgs e)
+        {
+            lblLogs.FormattedText.Spans.Clear();
+        }
     }
 }
 
