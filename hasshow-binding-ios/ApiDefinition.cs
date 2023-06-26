@@ -41,7 +41,7 @@ namespace NativeLibrary
 
         // -(void)getEslIdAction:(id<NFCTag>)tag FinishBlock:(void (^)(int *))finishBlock;
         [Export("getEslIdAction:FinishBlock:")]
-        unsafe void GetEslIdAction(INFCTag tag, Action<int> finishBlock);
+        unsafe void GetEslIdAction(INFCTag tag, Action<NFCResponse> finishBlock);
     }
 
     // @interface NFCResponse : NSObject

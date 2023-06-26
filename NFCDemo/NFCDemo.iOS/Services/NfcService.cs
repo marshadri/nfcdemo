@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using CoreFoundation;
 using CoreNFC;
 using Foundation;
 using NFCDemo.iOS.Services;
 using NFCDemo.Services;
+using static CoreFoundation.DispatchSource;
 
 [assembly: Xamarin.Forms.Dependency(typeof(NfcService))]
 namespace NFCDemo.iOS.Services
@@ -70,7 +72,20 @@ namespace NFCDemo.iOS.Services
                     {
                         lib.GetEslIdAction(tag, (response) =>
                         {
-                            tcs.TrySetResult(response.ToString());
+                           if(response.Error != null)
+                            {
+                                tcs.TrySetResult(response.Error.Description);
+                            }
+                            else
+                            {
+                                StringBuilder sb = new StringBuilder();
+                                foreach (var item in response.Data)
+                                {
+                                    sb.Append(item);
+                                    sb.Append("-");
+                                }
+                                tcs.TrySetResult(sb.ToString());
+                            }
                         });
                     }
                     tcs.TrySetResult("Trying to get Esl Id!");
