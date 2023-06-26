@@ -24,25 +24,9 @@ namespace NFCDemo
             lblLogs.FormattedText.Spans.Add(new Span() { Text = $"{e.Type}: {e.message} {Environment.NewLine}" });
         } 
 
-        void Button_Clicked(System.Object sender, System.EventArgs e)
+        async void Button_Clicked(System.Object sender, System.EventArgs e)
         {
-            
-            nfcService.ReadTagIdAsync().ContinueWith(x =>
-            {
-                var response = x.Result;
-                if (x.Exception == null)
-                {
-                    lblEsl.Text = response;
-                    DisplayAlert("NFC Demo",  response, "OK");
-                }
-                else
-                {
-                    lblEsl.Text = "Unable to get ESL Id";
-                }
-
-            });
-            
-
+            lblEsl.Text =  await nfcService.ReadTagIdAsync();
         }
         void ClearText()
         {
