@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -89,13 +90,15 @@ namespace NFCDemo.iOS.Services
                             }
                             else
                             {
-                                StringBuilder sb = new StringBuilder();
-                                foreach (var item in response.Data)
+                                var data = Convert(response.Data);
+                                if(data.ContainsKey("data"))
                                 {
-                                    sb.Append(item);
-                                    sb.Append("-");
+                                    tcs.TrySetResult(data["data"]);
                                 }
-                                tcs.TrySetResult(sb.ToString());
+                                else
+                                {
+                                    Log("Unable to find data", "error");
+                                }
                             }
                         });
                     }
@@ -111,6 +114,11 @@ namespace NFCDemo.iOS.Services
             });
         }
 
+        private static Dictionary<string, string> Convert(NSDictionary nativeDict)
+        {
+            return nativeDict.ToDictionary<KeyValuePair<NSObject, NSObject>, string, string>(
+                item => (NSString)item.Key, item => item.Value.ToString());
+        }
 
         public override void DidInvalidate(NFCTagReaderSession session, NSError error)
         {
